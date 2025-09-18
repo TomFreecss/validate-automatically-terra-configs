@@ -1,0 +1,23 @@
+tasks:
+  - name: Install Tools
+    init: |
+      # Install Terraform
+      wget https://releases.hashicorp.com/terraform/1.7.0/terraform_1.7.0_linux_amd64.zip
+      unzip terraform_1.7.0_linux_amd64.zip
+      sudo mv terraform /usr/local/bin/
+      rm terraform_1.7.0_linux_amd64.zip
+
+      # Install AWS CLI v2
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      rm awscliv2.zip
+      rm -rf ./aws
+      
+      echo "✅ Installation complete!"
+    
+    command: |
+      # This runs after init completes
+      echo "Checking installed versions:"
+      terraform version
+      aws --version
